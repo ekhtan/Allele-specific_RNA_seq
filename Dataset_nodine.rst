@@ -16,12 +16,12 @@ Dataset was downloaded from SRA using a bash file::
 
 Raw data files were symlinked and renamed based on the crosses and developmental stages::
 
-        ColxCvi_2cell_fastq.gz -> Raw_data/SRR364465.fastq.gz
-        CvixCol_2cell_fastq.gz -> Raw_data/SRR364466.fastq.gz
-        ColxCvi_8cell_fastq.gz -> Raw_data/SRR364467.fastq.gz
-        CvixCol_8cell_fastq.gz -> Raw_data/SRR364468.fastq.gz
-        ColxCvi_32cell_fastq.gz -> Raw_data/SRR364469.fastq.gz
-        CvixCol_32cell_fastq.gz -> Raw_data/SRR364470.fastq.gz
+        ln -s SRR364465.fastq.gz ColxCvi_2cell.fastq.gz
+        ln -s SRR364466.fastq.gz ColxCvi_8cell.fastq.gz
+        ln -s SRR364467.fastq.gz ColxCvi_32cell.fastq.gz
+        ln -s SRR364468.fastq.gz CvixCol_2cell.fastq.gz
+        ln -s SRR364469.fastq.gz CvixCol_8cell.fastq.gz
+        ln -s SRR364470.fastq.gz CvixCol_32cell.fastq.gz
         
 
 These files are pretty old solexa reads::
@@ -54,6 +54,7 @@ These are the adapters used::
 				AGATCGGAAG
 				>solB
 				AGATCGGAAGAGC
+				
 
 3. Assemble using Trinity
 -------------------------
