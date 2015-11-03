@@ -1,4 +1,6 @@
-# Allele-specific_RNA_seq
+# Allele-specific RNAseq Analysis
+
+Model organism -- <i>Arabidopsis thaliana</i>
 
 Trials and tribulations of allele-specific RNA seq analysis
 
