@@ -1,10 +1,10 @@
 # Allele-specific RNAseq Analysis
 
-Model organism -- <i>Arabidopsis thaliana</i>
+Model organism -- *Arabidopsis thaliana*
 
 Trials and tribulations of allele-specific RNA seq analysis
 
-Attempting to use the latest methods for Arabidopsis
-Combination of Trinity, WASP, salmon, EdgeR?
+Combination of Trinity, salmon, WASP, and EdgeR?
 
 Test dataset used is the one from Nodine, 2012: http://www.ncbi.nlm.nih.gov/pubmed/22266940
+
