@@ -14,6 +14,16 @@ Dataset was downloaded from SRA using a bash file::
         done
         
 
+Raw data files were symlinked and renamed based on the crosses and developmental stages::
+
+        ColxCvi_2cell_fastq.gz -> Raw_data/SRR364465.fastq.gz
+        CvixCol_2cell_fastq.gz -> Raw_data/SRR364466.fastq.gz
+        ColxCvi_8cell_fastq.gz -> Raw_data/SRR364467.fastq.gz
+        CvixCol_8cell_fastq.gz -> Raw_data/SRR364468.fastq.gz
+        ColxCvi_32cell_fastq.gz -> Raw_data/SRR364469.fastq.gz
+        CvixCol_32cell_fastq.gz -> Raw_data/SRR364470.fastq.gz
+        
+
 2. Trim Data
 ------------
 
@@ -27,6 +37,7 @@ Dataset was trimmed using sickle::
           sickle se -f $i -t sanger -o $BASE.fq
         done
         
+
 3. Assemble using Trinity
 -------------------------
 
