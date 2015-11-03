@@ -24,19 +24,36 @@ Raw data files were symlinked and renamed based on the crosses and developmental
         CvixCol_32cell_fastq.gz -> Raw_data/SRR364470.fastq.gz
         
 
+These files are pretty old solexa reads::
+
+				@SRR364465.1713 HWI-EAS413:3:1:2873:1092/1
+				GAGTTTTCAANTCTTACATCTGAATGCAGAGATATC
+				+
+				FBF@C??CA?#EEEEGGGGGHHHHHHHHEGFHHHB8
+				
+
 2. Trim Data
 ------------
 
-Dataset was trimmed using sickle::
+Dataset was trimmed using sickle and scythe::
 
         #!/bin/bash
         
         for i in *.gz
         do
-          BASE=$(basename $i .gz)
-          sickle se -f $i -t sanger -o $BASE.fq
+          BASE=$(basename $i _fastq.gz)
+          sickle se -f $i -t sanger -o $BASE.sickle
+          scythe -a adapter.fa $BASE.sickle -M 25 -o $BASE.fq
+          rm $BASE.sickle
         done
         
+
+These are the adapters used::
+
+				>solAd1
+				AGATCGGAAG
+				>solB
+				AGATCGGAAGAGC
 
 3. Assemble using Trinity
 -------------------------
