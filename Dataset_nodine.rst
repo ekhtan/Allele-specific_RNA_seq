@@ -56,20 +56,40 @@ These are the adapters used::
 				AGATCGGAAGAGC
 				
 
-3. Assemble using Trinity
--------------------------
+3. Align using bwa
+------------------
 
-Run Trinity::
+Run bwa-do-all from the comailab::
 
-        Trinity --seqType fq --JM 50G \
-        --single ColxCvi_2cell_fastq.fq,ColxCvi_32cell_fastq.fq,ColxCvi_8cell_fastq.fq,CvixCol_2cell_fastq.fq,CvixCol_32cell_fastq.fq,CvixCol_8cell_fastq.fq \
-        --CPU 16
-        
+				bwa-do-all
 
-Performed the following renaming/parsing steps to get assembly ready::
+4. Assemble using Cufflinks
+---------------------------
 
-        gzip -c trinity_out_dir/Trinity.fasta > trinity-ColCvi-raw.fa.gz
-        
-        
+Run Cufflinks on all the .bam files::
+
+				for f in $(pwd)/*.bam; do
+				  label=${f%_aln.sorted.bam}
+				  mkdir ${label}_cufflinks && cd ${label}_cufflinks
+				  cufflinks --label ${label} --num-threads 16 $f
+				done
+				
+
+Run Cuffmerge on the combined .gtf files::
+
+				for dir in $(pwd)/*_cufflinks; do
+				  echo $dir/transcripts.gtf; done > assemblies.txt
+				  
+				cuffmerge -o isofrac0.05 --num-threads 16 --min-isoform-fraction 0.05 assemblies.txt 2&> cuffisofrac0.05.log
+				cuffmerge -o isofrac0.2 --num-threads 16 --min-isoform-fraction 0.2 assemblies.txt 2&> cuffisofrac0.2.log
+				cuffmerge -o isofrac0.5 --num-threads 16 --min-isoform-fraction 0.5 assemblies.txt 2&> cuffisofrac0.5.log
+				cuffmerge -o isofrac0.7 --num-threads 16 --min-isoform-fraction 0.7 assemblies.txt 2&> cuffisofrac0.7.log
+				cuffmerge -o isofrac0.9 --num-threads 16 --min-isoform-fraction 0.9 assemblies.txt 2&> cuffisofrac0.9.log
+				
+
+5. Check assembly
+-----------------
+
+Load the tracks into the gbrowse on TAIR to determine which assembly to use
 
 
