@@ -90,6 +90,22 @@ Run Cuffmerge on the combined .gtf files::
 5. Check assembly
 -----------------
 
-Load the tracks into the gbrowse on TAIR to determine which assembly to use
+Load one of the tracks (I used the 0.2 cutoff) into the gbrowse on http://epigenomegateway.wustl.edu/browser/ to see how it looks like. But first will need to convert the gtf files to bed files::
+
+				wget -r --no-directories ftp://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/gtfToGenePred
+				wget -r --no-directories ftp://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/genePredToBed
+				chmod 755 g*
+				
+				$(pwd)/gtfToGenePred merged.gtf merged.gpred
+				$(pwd)/genePredToBed merged.gpred merged.bed
+				
+				sed '/chloroplast/d' merged.bed > nochlor.bed
+				sed '/mitochondria/d' nochlor.bed > test0.2.bed
+				
+
+Load tracks and saw that the assembly is not good at all. Will stop analysis here because of this.
+
+-end-
+-----
 
 
